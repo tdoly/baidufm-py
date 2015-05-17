@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-baidu fm api
+File: fm_api.py
 Author: tdoly
 """
 
@@ -35,7 +35,7 @@ ERROR_MSG = {
     '257': '需要验证码',
     '100005': '系统错误, 请稍后重试',
     '120016': '未知错误 120016',
-    '120019': '近期登录次数过多, 请先通过 passport.baidu.com 解除锁定',
+    '120019': '近期登录次数过多, 请先通过 passport.baidufm.com 解除锁定',
     '120021': '登录失败,请在弹出的窗口操作,或重新登录',
     '500010': '登录过于频繁,请24小时后再试',
     '401007': '您的手机号关联了其他帐号，请选择登录'
@@ -46,7 +46,7 @@ class APIError(Exception):
     pass
 
 
-class BaiduFMAPI(object):
+class BaiduFmAPI(object):
     def __init__(self, username, password):
         self.session = requests.session()
         self.username = username
@@ -148,7 +148,7 @@ class BaiduFMAPI(object):
             pwd_rsa = base64.b64encode(rsa.encrypt(self.password, key))
 
             self.login_data = {
-                'staticpage': 'http://fm.baidu.com/player/v2Jump.html',
+                'staticpage': 'http://fm.baidufm.com/player/v2Jump.html',
                 'charset': 'UTF-8',
                 'token': self.user['token'],
                 'tpl': 'box',
@@ -158,7 +158,7 @@ class BaiduFMAPI(object):
                 'codestring': None,
                 'isPhone': None,
                 'safeflg': '0',
-                'u': 'http://fm.baidu.com',
+                'u': 'http://fm.baidufm.com',
                 'quick_user': '0',
                 'logintype': 'dialogLogin',
                 'logLoginType': 'pc_loginDialog',
@@ -220,12 +220,12 @@ class BaiduFMAPI(object):
             params.update(extra_params)
 
         headers = consts.HEADERS
-        if 'fm.baidu.com' in url:
-            headers['Host'] = "fm.baidu.com"
-        elif 'passport.baidu.com' in url:
-            headers['Host'] = "passport.baidu.com"
+        if 'fm.baidufm.com' in url:
+            headers['Host'] = "fm.baidufm.com"
+        elif 'passport.baidufm.com' in url:
+            headers['Host'] = "passport.baidufm.com"
         else:
-            headers['Host'] = ".baidu.com"
+            headers['Host'] = ".baidufm.com"
 
         self._params_utf8(params)
         if method and method.lower() == 'post':
@@ -393,7 +393,7 @@ class BaiduFMAPI(object):
     def get_lrc(self, lrc_url):
         lrc_dict = dict()
         if "http" not in lrc_url:
-            lrc_url = "http://fm.baidu.com/" + lrc_url
+            lrc_url = "http://fm.baidufm.com/" + lrc_url
         content = self._request(lrc_url).text
         try:
             for line in content.split('\n'):

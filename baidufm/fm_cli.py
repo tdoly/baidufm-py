@@ -67,7 +67,7 @@ class BaiduFmCli(object):
         self.body_max_y = 0
 
     def setup(self, stdscr):
-        fm_log(logger, 'init baidu fm cli')
+        fm_log(logger, 'init baidufm fm cli')
         self.stdscr = stdscr
 
         # init color

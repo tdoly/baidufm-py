@@ -3,10 +3,9 @@
 
 """
 File: fm_player.py
-Author: limingdong
-Date: 4/27/15
-Description: 
+Author: tdoly
 """
+
 import subprocess
 import threading
 import os
@@ -207,7 +206,7 @@ def choose_player():
 def test():
     from fm_footer import Footer
 
-    stream_url = 'http://yinyueshiting.baidu.com/data2/music/35637510/52882018720064.m4a?xcode=95cdaaeca8069b7adfb67a194a8fb30314e495f9649b5904'
+    stream_url = 'http://yinyueshiting.baidufm.com/data2/music/35637510/52882018720064.m4a?xcode=95cdaaeca8069b7adfb67a194a8fb30314e495f9649b5904'
     log = Footer()
     player = choose_player()(log, threading.Event())
     player.play(stream_url)

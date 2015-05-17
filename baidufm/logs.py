@@ -3,9 +3,7 @@
 
 """
 File: logs.py
-Author: limingdong
-Date: 11/10/14
-Description: log file
+Author: tdoly
 """
 
 import consts
@@ -20,7 +18,7 @@ def __configure_logger():
     logger = logging.getLogger("baidufm")
     logger.setLevel(logging.DEBUG)
 
-    fh = logging.FileHandler("baidufm.log")
+    fh = logging.FileHandler(consts.HOST_PATH + "/baidufm.log")
     fh.setLevel(logging.DEBUG)
     formatter = logging.Formatter(PATTERN)
     fh.setFormatter(formatter)

@@ -1,16 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+"""
+File: baidufm.py
+Author: tdoly
+"""
 
 import curses
-from baidu.fm_cli import BaiduFmCli
-from baidu.fm_api import BaiduFMAPI
+from fm_cli import BaiduFmCli
+from fm_api import BaiduFmAPI
 
 
 def main():
-    username = ''
-    password = ''
-    baidu_api = BaiduFMAPI(username, password)
+    baidu_api = BaiduFmAPI('', '')
     baidu_cli = BaiduFmCli(baidu_api)
     curses.wrapper(baidu_cli.setup)
 

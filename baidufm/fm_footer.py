@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-File: fm_cli.py
+File: fm_footer.py
 Author: tdoly
 """
 
