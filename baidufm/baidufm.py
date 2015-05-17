@@ -12,10 +12,11 @@ from fm_api import BaiduFmAPI
 
 
 def main():
-    baidu_api = BaiduFmAPI('', '')
+    username = ''
+    password = ''
+    baidu_api = BaiduFmAPI(username, password)
     baidu_cli = BaiduFmCli(baidu_api)
     curses.wrapper(baidu_cli.setup)
-
 
 if __name__ == '__main__':
     main()
