@@ -16,6 +16,7 @@ import time
 from logs import fm_log
 from fm_footer import Footer
 from fm_player import choose_player
+from c_image import image_to_display
 
 logger = logging.getLogger('baidufm')
 
@@ -81,6 +82,12 @@ class BaiduFmCli(object):
         curses.init_pair(8, curses.COLOR_MAGENTA, curses.COLOR_BLACK)
         curses.init_pair(9, curses.COLOR_GREEN, curses.COLOR_BLACK)
         curses.init_pair(10, curses.COLOR_RED, curses.COLOR_BLACK)
+
+        curses.start_color()
+        for i in range(0, curses.COLORS):
+            if i < 10:
+                continue
+            curses.init_pair(i + 1, curses.COLOR_BLACK, i)
 
         self.player = choose_player()(self.footer, self.event)
 
@@ -163,11 +170,15 @@ class BaiduFmCli(object):
                 if result:
                     while True:
                         login_count += 1
+                        try:
+                            image_to_display(self.login_win, result, 8)
+                        except:
+                            pass
                         self.login_win.addstr(6, 2, "Captcha(%s): " % result, curses.color_pair(1))
                         self.login_win.addstr(7, 2, " " * 43, curses.A_UNDERLINE)
                         captcha = self.login_win.getstr(7, 2)
                         result = self.api.login(username, password, captcha)
-                        if not result or login_count > 1:
+                        if not result or login_count > 3:
                             break
                 if not result:
                     if isinstance(username, unicode):
@@ -176,10 +187,10 @@ class BaiduFmCli(object):
             except Exception as e:
                 fm_log(logger, "Login error. %s", str(e.args))
 
-        self.login_win.erase()
         self.refresh_body()
 
     def refresh_body(self):
+        self.login_win.erase()
         self.body_win.erase()
         self.body_win.move(1, 1)
         max_display = self.body_max_y - 1
@@ -268,8 +279,10 @@ class BaiduFmCli(object):
         if not self.song_links:
             song_ids = self.api.get_next_play_list(self.channel_id, self.song_id)
             self.song_links = self.api.get_song_link(song_ids)
-
-        link = self.song_links.pop()
+        try:
+            link = self.song_links.pop()
+        except:
+            self.play_selection()
         try:
             fm_log(logger, "len(song_links): %d, link info: %s", len(self.song_links), link)
             song_link = link['linkinfo']['128']['songLink']

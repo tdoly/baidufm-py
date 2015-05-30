@@ -333,7 +333,7 @@ class BaiduFmAPI(object):
         url = 'ch_name=%s&item_id=%s&action_no=%d&userid=%d&baiduid=%s' % (channel_id, song_id, 2, 0, baidu_uid)
         api = consts.FM_NEXT_PLAY_LIST + url
         content = self._request(api, extra_params=params)
-        song_ids = [int(play['songid']) for play in content.json()['list']]
+        song_ids = [str(play['songid']) for play in content.json()['list']]
         return song_ids
 
     def collect(self, song_id):
