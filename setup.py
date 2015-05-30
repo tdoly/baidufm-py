@@ -19,16 +19,18 @@ meta = dict(
     version=version,
     license=__license__,
     description=read('DESCRIPTION'),
-    long_description=read('README.md'),
+    long_description=read('README.rst'),
     platforms=('Any'),
     author='tdoly',
     author_email='hi@tdoly.com',
     url='https://github.com/tdoly/baidufm-py',
+    keywords='baidufm, baidufm-py, baidufm cli',
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
         'rsa',
         'requests',
+        'Pillow',
     ],
     entry_points={
         'console_scripts': [
