@@ -19,6 +19,8 @@ def call_c():
     """
     Call the C program for converting RGB to Ansi colors
     """
+    if not exists(consts.HOST_PATH):
+        os.mkdir(consts.HOST_PATH)
     library = expanduser(consts.HOST_PATH + '/image.so')
     sauce = join(dirname(__file__), 'image.c')
     if not exists(library) or getmtime(sauce) > getmtime(library):
