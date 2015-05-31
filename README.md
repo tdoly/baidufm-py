@@ -66,7 +66,9 @@ d 音乐加入垃圾箱
 ## Changelog
 
 0.2.2 基本功能
-0.2.3 添加验证码显示功能，修复程序BUG
+
+0.2.4 添加验证码显示功能，修复程序BUG
+
 ![demo image](http://blog.tdoly.com/baidufm-py/images/2.png "the demo image")
 
 ## License

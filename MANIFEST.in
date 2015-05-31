@@ -1,0 +1,2 @@
+include README.rst
+include baidufm/image.c
